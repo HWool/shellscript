@@ -306,7 +306,7 @@ subcommand `s`와 같이 쓰는 치환 플래그
 
 ### <b>Why Use tee</b>
 ***
-echo나 cat 등과 같은 IO redirection 연산자랄 사용하면 될텐데 왜 tee를 사용하는지.
+echo나 cat 등과 같은 IO redirection 연산자랑 사용하면 될텐데 왜 tee를 사용하는지.
 
 ``` bash
 echo "hello world" >> OUTFILE
@@ -331,5 +331,76 @@ echo를 받아서 sudo tee를 하면 정상적으로 동작할 것이다.
 이러한 이유로 tee는 shell script에서 root 권한으로 특정 파일을 쓰거나 append 할 때 주로 활용한다.
 
 
+<br>
 
+## <b> 10. wget</b>
+- 웹에서 파일을 다운로드하기 위한 명령줄 유틸리티로 HTTP,HTTPS 및 FTP 프로토콜을 사용하여 파일을 다운로드 받을 수 있다.
+- Syntax : `wget [옵션] [url]`
+
+<br>
+
+[ 옵션 ]
+***
+|short|long|설명|
+|----|----|-----|
+|-V|--version|wget 명령어의 버전을 출력|
+|-h|--help|wget 명령어의 도움말 출력|
+|-b|--background|wget 명령어를 시작한 후에 백그라운드에서 동작|
+|-e|--execute|.wgetrc라는 스타일의 명령을 실행|
+|-o|--output-file|메시지들이 파일로 생성|
+|-a|--append-output|메시지들을 파일에 추가|
+|-d|--debug|디버그 내용을 출력|
+|-q|--quiet|출력없이 종료|
+|-nv|--non-verbose|기본 옵션을 제거|
+|-i|--input-file|다운 받을 URL 주소를 파일에서 찾음|
+|-F|--force-html|HTML 파일을 입력값으로 취급|
+|-t|--tries|설정한 숫자만큼 시도(0일 경우 무한대)
+|-O|--output-document|문설르 입력값으로 취급|
+|-c|--contiune|연결이 끊긴 시점부터, 이어서 파일을 다운로드|
+|-N|--timestamping|로컬에 있는 것보다, 새롭지 않으면 파일 다운 X|
+|-S|--server-response|서버의 응답을 출력|
+|　|--spider|URL 주소가 올바른지 확인. (실제적으로 다운로드 작업 X)|
+|-T|--timeout|종료된 시간을 초 단위로 설정|
+|-w|--wait|연결을 위해 기다리는 시간을 초 단위로 설정|
+|-Q|--quota|재귀적 다운로드|
+|-x|--force-directories|디렉터리를 강제로 생성|
+|-P|--directory-prefix|파일들이 저장될 디렉터리를 지정|
+
+등 다양한 것들이 있음   
+[참조] <https://hippogrammer.tistory.com/158>
+***
+
+[ 예시 ]
+***
+Wget 명령을 사용해서 다른 이름으로 저장
+```
+wget -O latest-hugo.zip https://github.com/gohugoio/hugo/archive/master.zip
+
+# latest-hugo.zip으로 저장.
+```
+Wget 명령을 사용하여 특정 디렉터리에 파일을 다운로드
+```
+wget -P /mnt/iso http://mirrors.mit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso
+
+# /mnt/iso 디렉터리에 저장
+```
+Wget으로 다운로드를 재개하는 방법
+```
+wget -c http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso
+
+# Ubuntu 18.04 ISO 파일의 다운로드를 재개
+# 원격 서버가 다운로드 재개를 지원하지 않는 경우 처음부터 다운로드를 시작하고 기존 파일을 덮어쓴다.
+```
+
+Wget으로 여러 파일을 다운로드하는 방법
+```
+wget -i linux-distros.txt
+
+# http://mirrors.edge.kernel.org/archlinux/iso/2018.06.01/archlinux-2018.06.01-x86_64.iso
+# https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.iso
+# https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-dvd-x86_64-28-1.1.iso
+
+# txt 파일을 다운로드 하는데 안에는 세 개의 URL이 있음.
+```
+***
 
